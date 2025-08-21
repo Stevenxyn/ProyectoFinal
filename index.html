@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProyectoPracticas Uniminuto - Gestión de Datos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Proyecto Practicas Uniminuto</div>
+        <div class="user-info">Usuario</div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-item active" onclick="showModule('cargues')">Cargues masivos</div>
+            <div class="sidebar-item" onclick="showModule('productos')">Productos</div>
+            <div class="sidebar-item" onclick="showModule('usuarios')">Usuarios</div>
+        </div>
+
+        <div class="main-content">
+            <!-- Módulo Cargues Masivos -->
+            <div id="cargues-module">
+                <h1 class="page-title">Cargues masivos</h1>
+                
+                <div class="actions-bar">
+                    <button class="btn btn-secondary" onclick="openModal()">Realizar cargues masivos</button>
+                    <button class="btn btn-info" onclick="openInstructionsModal()">📋 Instrucciones</button>
+                </div>
+
+                <div class="filters">
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label class="filter-label">Fecha</label>
+                            <select>
+                                <option>Seleccionar...</option>
+                                <option>Última semana</option>
+                                <option>Último mes</option>
+                                <option>Últimos 3 meses</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Acción</label>
+                            <select>
+                                <option>Seleccionar...</option>
+                                <option>Crear Aliados</option>
+                                <option>Activar/desactivar Aliados</option>
+                                <option>Actualizar datos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Nombre archivo</label>
+                            <input type="text" placeholder="Buscar archivo...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Estado</label>
+                            <select>
+                                <option>Seleccionar...</option>
+                                <option>Procesado</option>
+                                <option>Pendiente</option>
+                                <option>Error</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Acción</th>
+                                <th>Nombre archivo</th>
+                                <th>Estado</th>
+                                <th>Archivo Excel cargado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>15/03/25, 2:45 p. m.</td>
+                                <td>Crear Aliados</td>
+                                <td>productos_marzo_2025.xlsx</td>
+                                <td><span class="status status-procesado">PROCESADO</span></td>
+                                <td><button class="download-btn">Descargar</button></td>
+                            </tr>
+                            <tr>
+                                <td>14/03/25, 10:30 a. m.</td>
+                                <td>Activar/desactivar Aliados</td>
+                                <td>inventario_actualizado.xlsx</td>
+                                <td><span class="status status-pendiente">PENDIENTE</span></td>
+                                <td><button class="download-btn">Descargar</button></td>
+                            </tr>
+                            <tr>
+                                <td>12/03/25, 4:15 p. m.</td>
+                                <td>Crear Aliados</td>
+                                <td>catalogo_productos.xlsx</td>
+                                <td><span class="status status-procesado">PROCESADO</span></td>
+                                <td><button class="download-btn">Descargar</button></td>
+                            </tr>
+                            <tr>
+                                <td>10/03/25, 9:20 a. m.</td>
+                                <td>Actualizar datos</td>
+                                <td>base_datos_clientes.xlsx</td>
+                                <td><span class="status status-procesado">PROCESADO</span></td>
+                                <td><button class="download-btn">Descargar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <span>Mostrando 1 a 4 de 12 registros</span>
+                    <button class="page-btn">‹</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">›</button>
+                </div>
+            </div>
+
+            <!-- Módulo Productos -->
+            <div id="productos-module" class="hidden">
+                <h1 class="page-title">Gestión de Productos</h1>
+                
+
+                <div class="actions-bar">
+                    <div>
+                        <button class="btn btn-primary">➕ Nuevo Producto</button>
+                    </div>
+                    <button class="btn btn-info" onclick="openInstructionsModal()">📋 Instrucciones</button>
+                </div>
+
+                <div class="filters">
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label class="filter-label">Categoría</label>
+                            <select>
+                                <option>Todas las categorías</option>
+                                <option>Electrónicos</option>
+                                <option>Ropa y Accesorios</option>
+                                <option>Hogar y Jardín</option>
+                                <option>Deportes</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Estado</label>
+                            <select>
+                                <option>Todos los estados</option>
+                                <option>Activo</option>
+                                <option>Inactivo</option>
+                                <option>Bajo Stock</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Búsqueda</label>
+                            <input type="text" placeholder="Buscar productos...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Proveedor</label>
+                            <select>
+                                <option>Todos los proveedores</option>
+                                <option>TechSupplier SA</option>
+                                <option>FashionWorld</option>
+                                <option>HomeCenter</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre Producto</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Estado</th>
+                                <th>Fecha Creación</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PRD-001</td>
+                                <td>iPhone 14 Pro Max</td>
+                                <td>Electrónicos</td>
+                                <td>$4,200,000</td>
+                                <td>25</td>
+                                <td><span class="status status-activo">ACTIVO</span></td>
+                                <td>15/03/25</td>
+                                <td>
+                                    <button class="action-btn view-btn">Ver</button>
+                                    <button class="action-btn edit-btn">Editar</button>
+                                    <button class="action-btn delete-btn">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PRD-002</td>
+                                <td>Camiseta Nike Dri-FIT</td>
+                                <td>Ropa y Accesorios</td>
+                                <td>$89,900</td>
+                                <td>5</td>
+                                <td><span class="status status-stock">BAJO STOCK</span></td>
+                                <td>14/03/25</td>
+                                <td>
+                                    <button class="action-btn view-btn">Ver</button>
+                                    <button class="action-btn edit-btn">Editar</button>
+                                    <button class="action-btn delete-btn">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PRD-003</td>
+                                <td>Sofá Modular 3 Puestos</td>
+                                <td>Hogar y Jardín</td>
+                                <td>$1,250,000</td>
+                                <td>12</td>
+                                <td><span class="status status-activo">ACTIVO</span></td>
+                                <td>12/03/25</td>
+                                <td>
+                                    <button class="action-btn view-btn">Ver</button>
+                                    <button class="action-btn edit-btn">Editar</button>
+                                    <button class="action-btn delete-btn">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PRD-004</td>
+                                <td>Auriculares Sony WH-1000XM4</td>
+                                <td>Electrónicos</td>
+                                <td>$799,000</td>
+                                <td>0</td>
+                                <td><span class="status status-inactivo">INACTIVO</span></td>
+                                <td>10/03/25</td>
+                                <td>
+                                    <button class="action-btn view-btn">Ver</button>
+                                    <button class="action-btn edit-btn">Editar</button>
+                                    <button class="action-btn delete-btn">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <span>Mostrando 1 a 4 de 1,247 registros</span>
+                    <button class="page-btn">‹</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">›</button>
+                </div>
+            </div>
+
+            <!-- Módulo Usuarios -->
+            <div id="usuarios-module" class="hidden">
+                <h1 class="page-title">Gestión de Usuarios</h1>
+                
+              
+                <div class="actions-bar">
+                    <div>
+                        <button class="btn btn-primary">👤 Nuevo Usuario</button>
+                    </div>
+                    <button class="btn btn-info" onclick="openInstructionsModal()">📋 Instrucciones</button>
+                </div>
+
+                <div class="filters">
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label class="filter-label">Rol</label>
+                            <select>
+                                <option>Todos los roles</option>
+                                <option>Administrador</option>
+                                <option>Cliente</option>
+                                <option>Vendedor</option>
+                                <option>Supervisor</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Estado</label>
+                            <select>
+                                <option>Todos los estados</option>
+                                <option>Activo</option>
+                                <option>Inactivo</option>
+                                <option>Suspendido</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Búsqueda</label>
+                            <input type="text" placeholder="Buscar usuarios...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Ciudad</label>
+                            <select>
+                                <option>Todas las ciudades</option>
+                                <option>Bogotá</option>
+                                <option>Medellín</option>
+                                <option>Cali</option>
+                                <option>Barranquilla</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre Completo</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Fecha Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>USR-001</td>
+                                <td>María Rodríguez García</td>
+                                <td>maria.rodriguez@email.com</td>
+                                <td>+57 310 123 4567</td>
+                                <td>Cliente</td>
+                                <td><span class="status status-activo">ACTIVO</span></td>
+                                <td>15/03/25</td>
+                                <td>
+                                    <button class="action-btn view-btn">Ver</button>
+                                    <button class="action-btn edit-btn">Editar</button>
+                                    <button class="action-btn delete-btn">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>USR-002</td>
+                                <td>Carlos Andrés López</td>
+                                <td>carlos.lopez@email.com</td>
+                                <td>+57 320 987 6543</td>
+                                <td>Vendedor</td>
+                                <td><span class="status status-activo">ACTIVO</span></td>
+                                <td>14/03/25</td>
+                                <td>
+                                    <button class="action-btn view-btn">Ver</button>
+                                    <button class="action-btn edit-btn">Editar</button>
+                                    <button class="action-btn delete-btn">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>USR-003</td>
+                                <td>Ana Patricia Vargas</td>
+                                <td>ana.vargas@email.com</td>
+                                <td>+57 315 456 7890</td>
+                                <td>Administrador</td>
+                                <td><span class="status status-activo">ACTIVO</span></td>
+                                <td>12/03/25</td>
+                                <td>
+                                    <button class="action-btn view-btn">Ver</button>
+                                    <button class="action-btn edit-btn">Editar</button>
+                                    <button class="action-btn delete-btn">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>USR-004</td>
+                                <td>Juan Diego Martínez</td>
+                                <td>juan.martinez@email.com</td>
+                                <td>+57 301 234 5678</td>
+                                <td>Cliente</td>
+                                <td><span class="status status-inactivo">INACTIVO</span></td>
+                                <td>10/03/25</td>
+                                <td>
+                                    <button class="action-btn view-btn">Ver</button>
+                                    <button class="action-btn edit-btn">Editar</button>
+                                    <button class="action-btn delete-btn">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <span>Mostrando 1 a 4 de 892 registros</span>
+                    <button class="page-btn">‹</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">›</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Carga -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Subir archivo</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">Categoría</label>
+                            <select class="form-control" id="categoria" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="tiendas">Tiendas</option>
+                                <option value="productos">Productos</option>
+                                <option value="usuarios">Usuarios</option>
+                                <option value="inventario">Inventario</option>
+                            </select>
+                            <div class="error-message" id="categoriaError">Este campo es requerido</div>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">Acción</label>
+                            <select class="form-control" id="accion" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="crear">Crear Tiendas</option>
+                                <option value="actualizar">Actualizar datos</option>
+                                <option value="activar">Activar/Desactivar</option>
+                            </select>
+                            <div class="error-message" id="accionError">Este campo es requerido</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Archivo</label>
+                        <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
+                            <div class="upload-icon">📁</div>
+                            <div class="upload-text">
+                                <strong>Cargar archivo</strong><br>
+                                <span id="fileName">El archivo es requerido</span>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" accept=".xlsx,.xls" style="display: none;" onchange="handleFileSelect(this)">
+                        <div class="error-message" id="archivoError">Debe seleccionar un archivo</div>
+                        <a href="#" class="download-template">Descargar plantilla Crear Tiendas</a>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                <button type="button" class="btn-process" onclick="processFile()">Procesar Archivo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Instrucciones -->
+    <div id="instructionsModal" class="modal">
+        <div class="modal-content instructions-content">
+            <div class="modal-header">
+                <h3 class="modal-title">📋 Instrucciones - Cómo usar el módulo de Cargues Masivos</h3>
+                <button class="close-btn" onclick="closeInstructionsModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                
+                <div class="info-box">
+                    <div class="info-title">
+                        💡 ¿Qué son los Cargues Masivos?
+                    </div>
+                    <div class="info-text">
+                        Los cargues masivos te permiten procesar grandes cantidades de datos de forma eficiente mediante archivos Excel, automatizando tareas que tomarían mucho tiempo hacer manualmente.
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-title">
+                        <span class="step-number">1</span>
+                        Preparar el archivo Excel
+                    </div>
+                    <div class="step-description">
+                        Antes de realizar un cargue, asegúrate de tener tu archivo Excel preparado con el formato correcto. Puedes descargar la plantilla correspondiente desde el botón "Descargar plantilla" en el modal de carga.
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-title">
+                        <span class="step-number">2</span>
+                        Iniciar el proceso de carga
+                    </div>
+                    <div class="step-description">
+                        Haz clic en el botón "Realizar cargues masivos" para abrir el modal de carga. Esto te permitirá configurar los parámetros de tu cargue.
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-title">
+                        <span class="step-number">3</span>
+                        Configurar categoría y acción
+                    </div>
+                    <div class="step-description">
+                        Selecciona la <strong>Categoría</strong> (Tiendas, Productos, Usuarios, Inventario) y la <strong>Acción</strong> (Crear, Actualizar, Activar/Desactivar) que corresponda a tu operación.
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-title">
+                        <span class="step-number">4</span>
+                        Cargar el archivo
+                    </div>
+                    <div class="step-description">
+                        Arrastra tu archivo Excel al área de carga o haz clic en ella para seleccionar el archivo desde tu computador. El sistema solo acepta archivos .xlsx y .xls.
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-title">
+                        <span class="step-number">5</span>
+                        Procesar el archivo
+                    </div>
+                    <div class="step-description">
+                        Una vez completados todos los campos, haz clic en "Procesar Archivo". El sistema validará la información y comenzará el procesamiento.
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-title">
+                        <span class="step-number">6</span>
+                        Monitorear el progreso
+                    </div>
+                    <div class="step-description">
+                        Después del procesamiento, podrás ver el registro en la tabla principal con su estado (Procesado, Pendiente, Error) y descargar el archivo cuando sea necesario.
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-title">
+                        ⚠️ Consideraciones importantes
+                    </div>
+                    <div class="warning-text">
+                        <ul class="file-format-list">
+                            <li>Asegúrate de que tu archivo tenga el formato correcto antes de cargarlo</li>
+                            <li>Los archivos con errores de formato pueden generar procesamiento fallido</li>
+                            <li>Revisa que todos los campos obligatorios estén completos</li>
+                            <li>El tamaño máximo recomendado por archivo es de 10MB</li>
+                            <li>La fecha de carga se asigna automáticamente</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-title">
+                        🔄 Estados de procesamiento
+                    </div>
+                    <div class="info-text">
+                        <strong>PROCESADO:</strong> El archivo se cargó y procesó correctamente<br>
+                        <strong>PENDIENTE:</strong> El archivo está en cola de procesamiento<br>
+                        <strong>ERROR:</strong> Hubo problemas durante el procesamiento
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-title">
+                        🔍 Usar los filtros
+                    </div>
+                    <div class="info-text">
+                        Utiliza los filtros en la parte superior para encontrar cargues específicos por fecha, acción, nombre de archivo o estado. Esto te ayudará a localizar rápidamente los registros que necesites.
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeInstructionsModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+<script src="main.js"></script>
+</body>
+</html>
